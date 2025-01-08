@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head') %>
+<body class="bg-home">
+
+    <%- include("partials/topnav") %>
+
+    <div class="container">
+        
+        <div class="p-5 m-5 bg-opacity-50 bg-dark rounded-5">
+            <div class="text-center">
+                <img class="rounded-circle" height="200" src="assets/logo.png" alt="profile pic">
+            </div>
+            <div class="container p-5 text-white">
+                <div class="container p-5">
+                <div class="row mb-2 bg-dark p-3 rounded-3">Name: <%=user[0].firstname + " " + user[0].lastname  %></div>
+                <div class="row mb-2 bg-dark p-3 rounded-3">Sex: <%=user[0].sex  %></div>
+                <div class="row mb-2 bg-dark p-3 rounded-3">Phone Number: <%=user[0].phone%> </div>
+                <div class="row mb-2 bg-dark p-3 rounded-3">Email:  <%=user[0].email%></div>
+                <div class="row mb-2 bg-dark p-3 rounded-3">Birthdate:  <%= new Date(user[0].birthdate).toISOString().slice(0, 10).replace(/-/g, '-') %>
+                </div>
+                <div class="row mb-2 bg-dark p-3 rounded-3">Address:  <%=user[0].address%></div> 
+                <div class="text-center">
+                    <a href="/profile-edit" class="btn btn-success">Edit</a>
+                </div> 
+                
+            </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

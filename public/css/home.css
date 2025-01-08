@@ -1,0 +1,72 @@
+.bg-orderEat {
+  background-color: #697565;
+}
+.bg-orderEat-light{
+  background-color: #abc0a3;
+}
+
+.text-red{
+  color: rgb(255, 90, 90);
+}
+.bg-home {
+  background-color: #ECDFCC;
+}
+
+.bg-greyfood {
+  background-color: #3A3B3C;
+}
+
+/* For smaller screens, scale down the input sizes */
+@media (max-width: 768px) {
+  .form-control-lg, .btn-lg, .form-select.form-select-lg {
+      font-size: 1.1rem; /* Slightly smaller text */
+      padding: 0.65rem;  /* Reduce padding */
+  }
+
+  /* Adjust form container size */
+  .container-fluid {
+      padding: 1rem;
+  }
+
+  /* Make the form width more flexible on smaller screens */
+  form {
+      width: 90%;
+  }
+
+  .d-flex .btn {
+      font-size: 1rem;
+  }
+
+  /* Specifically for the form-select dropdown */
+  .form-select.form-select-lg {
+      font-size: 1.1rem;  /* Slightly smaller dropdown font */
+      padding: 0.65rem;   /* Reduce padding for better scaling */
+  }
+}
+
+/* For medium to large screens */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .form-control-lg, .btn-lg, .form-select.form-select-lg {
+      font-size: 1.2rem; /* Smaller but still readable size */
+      padding: 0.75rem;  /* Reduce padding */
+  }
+
+  form {
+      width: 70%;
+  }
+}
+
+/* For larger screens, scale elements down */
+@media (min-width: 1200px) {
+  /* Smaller buttons and inputs for large screens */
+  .form-control-lg, .btn-lg, .form-select.form-select-lg {
+      font-size: 1.3rem; /* Slightly smaller on larger screens */
+      padding: 0.85rem;  /* Reduce padding */
+  }
+
+  form {
+      width: 50%; /* Adjust the form size */
+  }
+}
+
+

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("partials/head") %>
+
+<body class="bg-home">
+    <%- include("partials/topnav") %>
+
+    <section class="vh-100 m-4">
+        <div class="container-fluid rounded">
+            <div class="row p-5">
+                <!-- First column for the image -->
+                <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center mb-3 mb-lg-0">
+                    <img class="img-fluid rounded" src="assets/logo.png" alt="Logo">
+                </div>
+                <!-- Second column for the registration form -->
+                <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center rounded bg-orderEat">
+                    <form action="/register" method="post" class="w-75" id="registerForm">
+                        <h2 class="text-center text-white mb-4">Register</h2>
+                        
+                        <!-- First Name and Last Name Fields -->
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input type="text" oninput="isSpecial(this.value, fnnum); requiredField(this.value, fnreq);" onblur="requiredField(this.value, fnreq)"  name="firstname" id="firstname" class="form-control form-control-lg" placeholder="First Name">
+                                <span class="text-warning" id="fnreq" style="display: none;" >Name is required *</span>
+                                <span class="text-warning " id="fnnum" style="display: none;">Numbers or special characters are not allowed *</span>
+                            </div>
+                            <div class="col">
+                                <input type="text" oninput="isSpecial(this.value, lnnum); requiredField(this.value, lnreq);" onblur="requiredField(this.value, lnreq)" id="lastname" name="lastname" class="form-control form-control-lg" placeholder="Last Name">
+                                <span class="text-warning" id="lnreq" style="display: none;" >Last name is required *</span>
+                                <span class="text-warning " id="lnnum" style="display: none;">Numbers or special characters are not allowed *</span>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="row mb-3">
+                            <div class="col">
+                                <select onblur="requiredField(this.value, sreq)" name="sex" id="sex" class="form-select form-select-lg">
+                                    <option selected>Select Sex</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                                <span class="text-warning" id="sreq" style="display: none;" >Please select sex *</span>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="phone"  onkeypress="isNumberKey(event)" oninput=" notInteger(this.value, phonenum);  requiredField(this.value, phonereq);" onblur="requiredField(this.value, phonereq)"  name="phone" class="form-control form-control-lg" placeholder="Phone Number">
+                                <span class="text-warning " id="phonenum" style="display: none;">Only numbers are allowed *</span>
+                                <span class="text-warning" id="phonereq" style="display: none;" >Phone number is required *</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" id="email" oninput="isEmail(this.value, emailcheck);  requiredField(this.value, emailreq);" onblur="requiredField(this.value, emailreq)" name="email" class="form-control form-control-lg" placeholder="Email Address">
+                            <span class="text-warning" id="emailcheck" style="display: none;" >Invalid email *</span>
+                            <span class="text-warning" id="emailreq" style="display: none;" >Email address is required *</span>
+                        </div>
+
+                        <!-- Password Field with Eye Icon -->
+                        <div class="mb-3 position-relative">
+                            <input type="password" onblur="requiredField(this.value, passreq)" name="password" id="password" class="form-control form-control-lg" placeholder="Password">
+                            <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('password', 'toggleIcon')">
+                                <i id="toggleIcon" class="bi bi-eye-slash"></i>
+                            </span>
+                            <span class="text-warning" id="passreq" style="display: none;" >Password is required *</span>
+                        </div>
+                        <!-- Confirm Password Field with Eye Icon -->
+                        <div class="mb-4 position-relative">
+                            <input type="password" oninput="matchPassword(this.value, cpassmatch); requiredField(this.value, cpassreq);" onblur="requiredField(this.value, cpassreq)" name="confirmPassword" id="confirmPassword" class="form-control form-control-lg" placeholder="Confirm Password">
+                            <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('confirmPassword', 'toggleIconConfirm')">
+                                <i id="toggleIconConfirm" class="bi bi-eye-slash"></i>
+                            </span>
+                            <span class="text-warning" id="cpassreq" style="display: none;" >Confirm password is required *</span>
+                            <span class="text-warning" id="cpassmatch" style="display: none;" >Password does't match *</span>
+                            <span class="text-light" id="cpassmatchchecked" style="display: none;" >Password matched!</span>
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="birthday" class="form-label text-white fs-5">Birthdate</label>
+                            <input type="date" oninput="requiredField(this.value, bdayreq)" onblur="requiredField(this.value, bdayreq)"  id="birthday" class="form-control form-control-lg">
+                            <span class="text-warning" id="bdayreq" style="display: none;" >Birthdate is required *</span>
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" id="address" name="address" oninput="addressValidation(this.value, addval); requiredField(this.value, addreq)" onblur="requiredField(this.value, addreq)" class="form-control form-control-lg" placeholder="Address">
+                            <span class="text-warning" id="addreq" style="display: none;" >Address is required *</span>
+                            <span class="text-warning" id="addval" style="display: none;" >Only alphabets, numbers & dash, dot, & comma are required to use (.,-)</span>
+                        </div>
+
+                          <!-- Submit Button -->
+                          <div class="d-flex justify-content-center mb-3">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Register</button>
+                        </div>
+                        <div class="text-center text-white">
+                            Do you have an account?
+                            <a href="/login" class="text-info">Click here to Login</a>
+                        </div>
+
+                    </form>
+    </section>
+    <script src="/assets/js/register.js"></script>
+
+    <!-- JavaScript for Password Visibility Toggle and Validation -->
+    <script>
+        
+       //const firstname =  document.getElementById('firstname');
+       const password =  document.getElementById('password');
+        const fnreq = document.getElementById('fnreq');
+        const fnnum = document.getElementById('fnnum');
+ 
+        const lnreq = document.getElementById('lnreq');
+        const lnnum = document.getElementById('lnnum');
+        
+        const sreq= document.getElementById('sreq');
+ 
+        const phonenum =  document.getElementById('phonenum');
+        const phonereq = document.getElementById('phonereq');
+ 
+        const emailcheck = document.getElementById('emailcheck'); 
+        const emailreq = document.getElementById('emailreq');
+        const cpassmatch = document.getElementById('cpassmatch');
+        const passreq = document.getElementById('passreq');
+        const cpassreq = document.getElementById('cpassreq');
+        
+ 
+        const bdayreq = document.getElementById('bdayreq');
+ 
+        const addreq = document.getElementById('addreq');
+        const addval = document.getElementById('addval');
+
+        
+       function notInteger(value, id){
+        
+        if(value.match(/[^-]?\D/)) {
+            id.style.display = 'inline';
+         }
+         else{
+            id.style.display = 'none';
+         }
+
+       }
+       function isNumberKey(event) {
+        // Get the character code of the key that was pressed
+        const charCode = event.which ? event.which : event.keyCode;
+        
+        // Allow only numeric characters (0-9)
+        if (charCode < 48 || charCode > 57) {
+            event.preventDefault(); // Prevent the character from being entered
+            return false;
+        }
+        return true;
+    }
+    
+       function isEmail(value, id){
+        if(value.trim() ===''){
+            id.style.display = 'none'; 
+        }
+        else if (!value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { // If email is NOT valid
+            console.log("Email is invalid");
+            id.style.display = 'inline'; // Show error message
+        }
+        else {
+            console.log("Email is valid");
+            id.style.display = 'none'; // Hide error message
+        }
+       }
+
+
+       function requiredField(value, id){
+        if(value.trim()==='' || value === 'Select Sex'){
+            id.style.display= 'inline';
+        }
+        else{
+            id.style.display= 'none';
+        }
+       }
+       function addressValidation(value,id){
+        
+        if(value.match(/[^a-zA-Z0-9.,\- ]/)){
+            id.style.display = 'inline';
+        }
+        else{
+            id.style.display = 'none';
+         }
+
+       }
+
+       function isSpecial(value, id){
+
+         if(value.match(/\d/) || value.match(/[^a-zA-Z0-9.\- ]/
+)){
+            id.style.display = 'inline';
+         }
+         else{
+            id.style.display = 'none';
+         }
+
+       }
+
+       function matchPassword(value, id){
+        console.log(value)
+        if(value ===  password.value)
+        {
+            cpassmatchchecked.style.display = 'inline';
+            id.style.display = 'none';
+
+            //<span class="text-info" id="cpassmatchchecked" style="display: none;" >Password matched! *</span>
+        }
+        else{
+            cpassmatchchecked.style.display = 'none';
+            id.style.display = 'inline';
+        }
+       }
+       
+
+
+        function togglePassword(fieldId, iconId) {
+            var passwordField = document.getElementById(fieldId);
+            var toggleIcon = document.getElementById(iconId);
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.classList.remove("bi-eye-slash");
+                toggleIcon.classList.add("bi-eye");
+            } else {
+                passwordField.type = "password";
+                toggleIcon.classList.remove("bi-eye");
+                toggleIcon.classList.add("bi-eye-slash");
+            }
+        }
+
+        // Client-side password validation
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                e.preventDefault(); // Prevent form submission
+                alert("Passwords do not match!");
+            }
+        });
+      
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("partials/head") %>
+
+<body class="bg-home">
+    <%- include("partials/topnav") %>
+
+    <section class="vh-100 m-4">
+        <div class="container-fluid rounded">
+            <div class="row p-5">
+                <!-- First column for the image -->
+                <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center mb-3 mb-lg-0">
+                    <img class="img-fluid rounded" src="assets/logo.png" alt="Logo">
+                </div>
+                <!-- Second column for the login form -->
+                <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center rounded bg-orderEat">
+                    <form action="/login" method="post" class="w-75" id="loginForm">
+                        <h2 class="text-center text-white mb-4">Login</h2>
+                        
+                        <!-- Email Field -->
+                        <div class="mb-3">
+                            <input type="email" id="email" oninput="isEmail(this.value, emailcheck); requiredField(this.value, emailreq);" onblur="requiredField(this.value, emailreq)" name="email" class="form-control form-control-lg" placeholder="Email Address">
+                            <span class="text-warning" id="emailcheck" style="display: none;">Invalid email *</span>
+                            <span class="text-warning" id="emailreq" style="display: none;">Email address is required *</span>
+                        </div>
+
+                        <!-- Password Field with Eye Icon -->
+                        <div class="mb-3 position-relative">
+                            <input type="password" onblur="requiredField(this.value, passreq)" name="password" id="password" class="form-control form-control-lg" placeholder="Password">
+                            <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('password', 'toggleIcon')">
+                                <i id="toggleIcon" class="bi bi-eye-slash"></i>
+                            </span>
+                            <span class="text-warning" id="passreq" style="display: none;">Password is required *</span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-flex justify-content-center mb-3">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Login</button>
+                        </div>
+
+                        <!-- Register Link -->
+                        <div class="text-center text-white">
+                            Don't have an account?
+                            <a href="/register" class="text-info">Click here to Register</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/assets/js/login.js"></script>
+    <!-- JavaScript for Password Visibility Toggle and Validation -->
+    <script>
+        const emailcheck = document.getElementById('emailcheck'); 
+        const emailreq = document.getElementById('emailreq');
+        const passreq = document.getElementById('passreq');
+
+        function isEmail(value, id) {
+            if (value.trim() === '') {
+                id.style.display = 'none'; 
+            } else if (!value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                id.style.display = 'inline';
+            } else {
+                id.style.display = 'none';
+            }
+        }
+
+        function requiredField(value, id) {
+            if (value.trim() === '') {
+                id.style.display = 'inline';
+            } else {
+                id.style.display = 'none';
+            }
+        }
+
+        function togglePassword(fieldId, iconId) {
+            var passwordField = document.getElementById(fieldId);
+            var toggleIcon = document.getElementById(iconId);
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.classList.remove("bi-eye-slash");
+                toggleIcon.classList.add("bi-eye");
+            } else {
+                passwordField.type = "password";
+                toggleIcon.classList.remove("bi-eye");
+                toggleIcon.classList.add("bi-eye-slash");
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</body>
+
+</html>

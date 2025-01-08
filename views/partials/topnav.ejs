@@ -1,0 +1,40 @@
+<nav class="navbar sticky-top bg-orderEat" background-color: #697565;>
+    <div class="container-fluid">
+      <a class="navbar-brand text-white fs-3" href="/">
+        <img src="assets/logo.png" width="50" height="50" class="rounded-circle" alt="">
+        Order-Eat</a>
+      <div class="row">
+        <% if(!session.user){ %>
+          <% if(title!="Login"){
+            %>
+            <div class="col">
+              <a class="btn btn-outline-light" href="/login">Login</a>
+            </div>
+            <%
+          }%>
+          <% if(title!="Registration"){
+            %>
+            <div class="col">
+              <a class="btn btn-outline-light" href="/register">Register</a>
+            </div>
+            <%
+          }%>
+          <%} 
+          else {%>
+            <div class="col dropdown">
+              
+              <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <%=session.user.email %>
+            </button>
+              
+              
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+              </ul>
+          </div>
+          <% } %>
+      </div>
+    </div>
+
+  </nav>
